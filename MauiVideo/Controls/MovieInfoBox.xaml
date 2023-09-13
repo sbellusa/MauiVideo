@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiVideo.Controls.MovieInfoBox"
+             xmlns:models="clr-namespace:MauiVideo.Models"
+             xmlns:controls="clr-namespace:MauiVideo.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="MovieInfoBoxControl">
+
+    <Grid RowDefinitions="*,Auto">
+        <BoxView Color="{StaticResource Gray900}"
+                 Opacity="0.8"
+                 Grid.RowSpan="2">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type controls:MovieInfoBox}}, Path=CloseCommand}" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Border BindingContext="{x:Reference MovieInfoBoxControl}"
+                Grid.Row="1"
+                StrokeShape="RoundRectangle 10,10,0,0"
+                StrokeThickness="0"
+                BackgroundColor="#2b2b2b"
+                Margin="0"
+                Padding="0,0,0,0">
+
+            <Grid RowDefinitions="*,Auto">
+               
+                <controls:MovieControl Movie="{Binding Movie}" 
+                                       Grid.Row="0"
+                                       MaximumHeightRequest="170" />
+
+                <VerticalStackLayout Grid.Row="1">
+                    <BoxView HeightRequest="2" 
+                             Margin="5,0"
+                             Color="{StaticResource Gray600}"/>
+                    <Label Text="Details &amp; more" Padding="24" />
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type controls:MovieInfoBox}}, Path=GoToDetailsCommand}"
+                                              CommandParameter="{Binding Movie}" />
+                    </VerticalStackLayout.GestureRecognizers>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentView>

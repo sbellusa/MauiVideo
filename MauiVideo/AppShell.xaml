@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiVideo.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:MauiVideo.Views" 
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Shell.FlyoutBehavior="Disabled"
+    BackgroundColor="{StaticResource Gray900}"
+    Shell.TabBarBackgroundColor="{StaticResource Gray900}"
+    Shell.TabBarForegroundColor="{StaticResource Gray200}"
+    Shell.TabBarTitleColor="{StaticResource Gray200}"
+    Shell.TabBarUnselectedColor="{StaticResource Gray500}">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource Gray900}" />
+    </Shell.Behaviors>
+    
+    <Shell.TitleView>
+        <Grid>
+            <ImageButton Source="mauimovies.png" 
+                         x:Name="LogoButton"
+                         HeightRequest="30"
+                         BackgroundColor="Transparent"
+                         Pressed="LogoButton_Pressed" />
+            
+            <ImageButton    Source="back.ico" 
+                            x:Name="BackButton"
+                            Aspect="AspectFit"
+                            IsOpaque="True" 
+                            BorderColor="White"
+                            BackgroundColor="Transparent"
+                            HeightRequest="20" 
+                            WidthRequest="20" 
+                            VerticalOptions="Center" 
+                            HorizontalOptions="Start"
+                            Pressed="BackButton_Pressed" />
+        </Grid>
+    </Shell.TitleView>
+    
+    <TabBar x:Name="TabBarMenu">
+        <Tab Title="Home"
+             Icon="home.png">
+            <ShellContent x:Name="MainPageContent"
+                ContentTemplate="{DataTemplate views:MainPage}"
+                Route="MainPage" />
+        </Tab>
+        <Tab Title="Categories"
+             Icon="console.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:CategoriesPage}"
+                Route="Categories" />
+  
+        </Tab>
+
+        <!--<ShellContent
+            Title="Games"
+            Icon="console.png"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="Games" />
+        
+        <ShellContent
+            Title="New &amp; Hot"
+            Icon="newhot.png"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="NewAndHot" />
+
+        <ShellContent
+            Title="Downloads"
+            Icon="downloads.png"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="Downloads" />-->
+
+    </TabBar>
+</Shell>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiVideo.Views.DetailsPage"
+             xmlns:models="clr-namespace:MauiVideo.Models"
+             xmlns:viewModels="clr-namespace:MauiVideo.ViewModels"
+             xmlns:views="clr-namespace:MauiVideo.Views"
+             xmlns:controls="clr-namespace:MauiVideo.Controls"
+             BackgroundColor="{StaticResource Gray900}"
+             Shell.NavBarIsVisible="True"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewModels:DetailsViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNullConverter x:Key="IsNullConverter" />
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+
+                <Image Source="{Binding Movie.BackdropUrl}" 
+                       Aspect="AspectFill"
+                       Grid.RowSpan="3" 
+                       Opacity="0.1" />
+
+                <Grid HeightRequest="450">
+
+                    <Image Source="{Binding Movie.PosterUrl}" 
+                            HeightRequest="450"
+                           Aspect="AspectFit" />
+
+                    <WebView Source="{Binding SelectedTrailer.VideoUrl}"
+                             HeightRequest="450"
+                             IsVisible="{Binding SelectedTrailer, Converter={StaticResource IsNotNullConverter}}"/>
+                </Grid>
+
+                <CollectionView ItemsSource="{Binding Videos}"
+                                SelectedItem="{Binding SelectedTrailer}"
+                                SelectionMode="Single"
+                                Grid.Row="1"
+                                Margin="0,10"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding SelectedTrailer, Converter={StaticResource IsNotNullConverter}}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Video">
+                            <Image Source="{Binding ThumbnailUrl}" 
+                                   WidthRequest="100"
+                                   HeightRequest="70" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+                <VerticalStackLayout Grid.Row="2" Padding="20">
+                    <Label Text="{Binding Movie.DisplayTitle}" Padding="0,12" FontSize="Large" />
+
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Movie.VoteAverage, StringFormat='{0:F1} ★ '}" 
+                                      FontSize="14" 
+                                      FontAttributes="Bold" />
+                                <Span Text="{Binding Movie.VoteCount, StringFormat=' ({0:F0} votes)'}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="{Binding Movie.Overview}"
+                            FontSize="Small"
+                           Padding="0,20"
+                            TextColor="{StaticResource Gray200}"/>
+
+
+                    <Label Text="{Binding Movie.ReleaseDate}"
+                            FontSize="Micro"
+                            TextColor="{StaticResource Gray200}"/>
+
+                </VerticalStackLayout>
+
+                <Grid Grid.Row="3" RowDefinitions="Auto,*">
+                    <Label Text="More like this" Padding="12" FontSize="Medium" />
+                    <FlexLayout BindableLayout.ItemsSource="{Binding SimilarMovies}" 
+                                JustifyContent="Start"
+                                Grid.Row="1"
+                                Wrap="Wrap">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="models:Movie">
+                                <Border StrokeShape="RoundRectangle 5"
+                                        Margin="1,0,1,2"
+                                        WidthRequest="{Binding Source={RelativeSource AncestorType={x:Type viewModels:DetailsViewModel}}, 
+                                                               Path=SimilarItemsWidth}" 
+                                        StrokeThickness="0"
+                                        BackgroundColor="{StaticResource Gray900}">
+                                    <Image Source="{Binding ThumbnailSmall}" />
+
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:DetailsViewModel}}, Path=GoToDetailsCommand}"
+                                                              CommandParameter="{Binding}" />
+                                    </Border.GestureRecognizers>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        
+                        
+                    </FlexLayout>
+                </Grid>
+            </Grid>
+        </ScrollView>
+
+        <ActivityIndicator Color="{StaticResource Gray200}"
+                           IsRunning="{Binding IsBusy}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           HeightRequest="50"
+                           WidthRequest="50" />
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiVideo.Views.MainPage"
+             Shell.NavBarIsVisible="True"
+             BackgroundColor="{StaticResource Gray900}"
+             xmlns:controls="clr-namespace:MauiVideo.Controls"
+             xmlns:viewModels="clr-namespace:MauiVideo.ViewModels"
+             x:DataType="viewModels:MainPageViewModel">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="MenuLabel">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontAttributes" Value="Bold" />   
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid RowDefinitions="7*,3*">
+            <Grid x:Name="Ruler"/>
+        </Grid>
+
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto">
+                
+                <!-- Hero movie box --> 
+                <Grid>
+                    <Image Aspect="AspectFill"
+                           Opacity="0.8"
+                           HeightRequest="{Binding Source={x:Reference Ruler}, Path=Height}">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding TrendingMovie.Thumbnail}" />
+                        </Image.Source>
+                    </Image>
+
+                    <Grid VerticalOptions="End" 
+                          RowDefinitions="Auto,Auto"
+                          Margin="0,50,0,0">
+                        <Grid BackgroundColor="Black" Opacity="0.8" Grid.RowSpan="2" />
+                        <Label Text="{Binding TrendingMovie.DisplayTitle}" Padding="20,20,20,0" FontSize="30"  />
+                        <Label Text="{Binding TrendingMovie.Overview}" Padding="20" FontSize="12" Grid.Row="1" Opacity="0.7" HorizontalOptions="Start"  />
+                    </Grid>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToDetailsCommand}"
+                                              CommandParameter="{Binding TrendingMovie}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <!-- Overlay menu items -->
+                <Grid VerticalOptions="Start"
+                          HeightRequest="35" 
+                          Margin="0,35,0,0">
+                    <FlexLayout JustifyContent="SpaceAround"
+                                    VerticalOptions="Center">
+                        
+                        <Label Text="TV Shows" Style="{StaticResource MenuLabel}" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="tv" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        
+                        <Label Text="Movies" Style="{StaticResource MenuLabel}" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="movies" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        
+                        <Label Text="Categories" Style="{StaticResource MenuLabel}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="categories" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        
+                    </FlexLayout>
+                </Grid>
+
+                <!-- Movie categories -->
+                <VerticalStackLayout Grid.Row="1">
+                    <controls:MovieRow Heading="Top Rated"
+                                           Movies="{Binding TopRated}"
+                                           IsLarge="False"
+                                           SelectedMovieCommand="{Binding SelectMovieCommand}"/>
+
+                    <controls:MovieRow Heading="Originals"
+                                           Movies="{Binding NetflixOriginals}"
+                                           IsLarge="True" 
+                                           SelectedMovieCommand="{Binding SelectMovieCommand}"/>
+
+                    <controls:MovieRow Heading="Trending"                                   
+                                           Movies="{Binding Trending}"
+                                           IsLarge="False" 
+                                           SelectedMovieCommand="{Binding SelectMovieCommand}"/>
+
+                    <controls:MovieRow Heading="Action"
+                                           Movies="{Binding ActionMovies}"
+                                           IsLarge="False" 
+                                           SelectedMovieCommand="{Binding SelectMovieCommand}"/>
+
+                </VerticalStackLayout>
+                
+            </Grid>
+        </ScrollView>
+
+        <Grid HeightRequest="35"
+              IsVisible="false"
+              VerticalOptions="Start">
+            <!--<FlexLayout AlignContent="SpaceBetween">-->
+            <Image Source="netflix" 
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Start"
+                       VerticalOptions="End"/>
+
+            <HorizontalStackLayout HorizontalOptions="End" 
+                                       VerticalOptions="Center"
+                                       Spacing="12"
+                                       Margin="12,0">
+
+                <ImageButton Source="search"
+                                 Aspect="AspectFill"
+                                 HeightRequest="20" 
+                                 WidthRequest="20"/>
+
+                <ImageButton Source="user"
+                                 Aspect="AspectFill"
+                                 HeightRequest="20" 
+                                 WidthRequest="20"/>
+
+            </HorizontalStackLayout>
+            <!--</FlexLayout>-->
+        </Grid>
+
+        <controls:MovieInfoBox Movie="{Binding SelectedMovie}"    
+                               CloseCommand="{Binding SelectMovieCommand}"
+                               GoToDetailsCommand="{Binding GoToDetailsCommand}"
+                               IsVisible="{Binding IsVisibleInfoBox}" />
+    </Grid>
+
+</ContentPage>

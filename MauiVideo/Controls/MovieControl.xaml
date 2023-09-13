@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiVideo.Controls.MovieControl"
+             xmlns:models="clr-namespace:MauiVideo.Models"
+             xmlns:controls="clr-namespace:MauiVideo.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="MovieItemControl">
+
+
+    <Border BindingContext="{x:Reference MovieItemControl}"
+            Grid.Row="1" 
+            StrokeShape="RoundRectangle 10"
+            StrokeThickness="0"
+            BackgroundColor="#2b2b2b">
+
+        <Grid>
+            <Image Source="{Binding Movie.BackdropSmallUrl}" Aspect="AspectFill" />
+            <BoxView Opacity="0.8" />
+            <VerticalStackLayout>
+                <Grid RowDefinitions="Auto,Auto, Auto" 
+                        ColumnDefinitions="120, *, Auto"
+                        Padding="10"
+                        ColumnSpacing="10">
+
+                    <Border Grid.RowSpan="3"
+                            WidthRequest="100"
+                            HeightRequest="150"
+                            VerticalOptions="Start"
+                            StrokeShape="RoundRectangle 5"
+                            Stroke="Transparent"
+                            StrokeThickness="0">
+                        <Image Source="{Binding Movie.Thumbnail}"
+                                Aspect="AspectFill"/>
+                    </Border>
+
+                    <Label Text="{Binding Movie.DisplayTitle}" 
+                            FontSize="17"
+                            Grid.Row="0" 
+                            Grid.Column="1" />
+
+                    <Label Grid.Row="1" 
+                            Grid.Column="1"
+                            FontSize="10"
+                            Padding="0,4"
+                            TextColor="{StaticResource Gray300}"
+                            Grid.ColumnSpan="2" 
+                            Text="{Binding Movie.ReleaseDate}" />
+
+                    <Label Grid.Row="2" 
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2" 
+                            FontSize="12"
+                            MaxLines="5"
+                            TextColor="{StaticResource Gray100}"
+                            Text="{Binding Movie.Overview}" />
+
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type controls:MovieControl}}, Path=GoToDetailsCommand}"
+                                    CommandParameter="{Binding Movie}" />
+        </Border.GestureRecognizers>
+
+    </Border>
+</ContentView>
