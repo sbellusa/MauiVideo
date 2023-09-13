@@ -6,11 +6,7 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Demo](#demo)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Screenshots](#screenshots)
 
 ## Introduction
 
