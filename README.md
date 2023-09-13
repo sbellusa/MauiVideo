@@ -1,4 +1,4 @@
-# Movie Display Application
+# MauiMovies Application
 
 ![Movie Display App](/Screenshots/mauimovies.png)
 
@@ -21,10 +21,10 @@ https://developer.themoviedb.org/docs
 
 ## Features
 
-- **Browse Movies**: Explore the most recent or highest rated movies on main categories.
+- **Browse Movies**: Explore the Top Rated, Originals, Trending, Action movies on the main Cinema and TV categories.
 - **Movie Details**: View detailed information about a selected movie, including its title, poster, videos, release date, and description.
 - **Categories**: Browse by category, on both Cinema and TV movies.
-- **Responsive Design**: The application is responsive and works seamlessly on various screen sizes and devices.
+- **Multiplatform Design**: The application works seamlessly on various screen sizes and platforms.
 - **User-friendly Interface**: An intuitive and user-friendly interface for easy navigation and a pleasant user experience.
 
 ## Screenshots
