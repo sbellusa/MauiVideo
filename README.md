@@ -1,6 +1,6 @@
 # Movie Display Application
 
-![Movie Display App](/MauiVideo/Resources/Images/mauimovies.png)
+![Movie Display App](/Screenshots/mauimovies.png)
 
 ## Table of Contents
 
