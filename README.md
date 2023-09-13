@@ -35,12 +35,12 @@ https://developer.themoviedb.org/docs
 
 Check out some screenshots from the App below:
 
-![Movie Display App](/Screenshots/home.png){width=200 height=600}
-![Movie Display App](/Screenshots/home2.png){width=200 height=600}
-![Movie Display App](/Screenshots/home3.png){width=200 height=600}
-![Movie Display App](/Screenshots/categories.png){width=200 height=600}
-![Movie Display App](/Screenshots/moviesincategory.png){width=200 height=600}
-![Movie Display App](/Screenshots/moviesincategory2.png){width=200 height=600}
-![Movie Display App](/Screenshots/moviedetails.png){width=200 height=600}
-![Movie Display App](/Screenshots/moviedescription.png){width=200 height=600}
-![Movie Display App](/Screenshots/relatedmovies.png){width=200 height=600}
+![Movie Display App](/Screenshots/home.png)
+![Movie Display App](/Screenshots/home2.png)
+![Movie Display App](/Screenshots/home3.png)
+![Movie Display App](/Screenshots/categories.png)
+![Movie Display App](/Screenshots/moviesincategory.png)
+![Movie Display App](/Screenshots/moviesincategory2.png)
+![Movie Display App](/Screenshots/moviedetails.png)
+![Movie Display App](/Screenshots/moviedescription.png)
+![Movie Display App](/Screenshots/relatedmovies.png)
