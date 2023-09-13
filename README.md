@@ -10,7 +10,7 @@
 
 ## Introduction
 
-The Movie Display Application is a web-based application that allows users to view details of their favorite movies. It provides an intuitive and user-friendly interface to explore a vast collection of movies, including information about movie titles, genres, release dates, and more.
+The Movie Display Application is a .NET MAUI application that allows users to view details of their favorite movies. It provides an intuitive and user-friendly interface to explore a vast collection of movies, including information about movie titles, genres, release dates, and more.
 
 This project was created because of a challenge to showcase a small .NET MAUI app using a public API. It is designed to demonstrate .NET MAUI native implementation features, following best practises, in order to run on iOS, Android and Windows machines. 
 
